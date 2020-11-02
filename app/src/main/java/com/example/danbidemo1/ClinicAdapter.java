@@ -1,6 +1,7 @@
 package com.example.danbidemo1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder> {
+public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder> implements OnClinicCenterClickListner{
 
 
     private ArrayList<Clinic> arrayList;
     private Context context;
-
+    OnClinicCenterClickListner listner;
     public ClinicAdapter(ArrayList<Clinic> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
@@ -49,6 +50,10 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
         return (arrayList != null ? arrayList.size() : 0);
     }
 
+
+
+
+
     public class ClinicViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_profile;
         TextView tv_clinicName;
@@ -62,9 +67,31 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
             this.tv_clinicName = itemView.findViewById(R.id.clinic_name);
             this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise);
             this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(listner != null){
+                        listner.OnItemClick(ClinicViewHolder.this, view, position);
+                    }
+                }
+            });
         }
     }
+
+    public void setOnItemClickListener(OnClinicCenterClickListner listener){
+        this.listner = listener;
+        Log.d("test", "SetOnItemClick");
+    }
+
+    @Override
+    public void OnItemClick(ClinicViewHolder holder, View view, int position) {
+        if(listner != null){
+            listner.OnItemClick(holder, view, position);
+            Log.d("hello", "OnItemClickSet");
+        }
+    }
+
     private String addTag(String expert){
         String result="";
         String temp[];

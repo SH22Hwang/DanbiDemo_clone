@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class ClinicList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private ClinicAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Clinic> arrayList;
 
@@ -66,7 +67,15 @@ public class ClinicList extends AppCompatActivity {
                 });
         adapter = new ClinicAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-
+        adapter.setOnItemClickListener(new OnClinicCenterClickListner() {
+            @Override
+            public void OnItemClick(ClinicAdapter.ClinicViewHolder holder, View view, int position) {
+                Intent intent = new Intent(getApplicationContext(), ClinicIntroduction.class);
+                Log.d("test", position + "");
+                intent.putExtra("ClinicIndex", position);
+                startActivity(intent);
+            }
+        });
 
 //        notebookRef.get()
 //                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
