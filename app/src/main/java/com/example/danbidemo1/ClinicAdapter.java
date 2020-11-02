@@ -39,7 +39,7 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
         holder.tv_clinicName.setText(arrayList.get(position).getClinic_name());
-        holder.tv_clinicExpertise.setText(arrayList.get(position).getClinic_expertise() + "");
+        holder.tv_clinicExpertise.setText(addTag(arrayList.get(position).getClinic_expertise()));
         holder.tv_clinicAddress.setText(arrayList.get(position).getClinic_address());
     }
 
@@ -64,5 +64,14 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
             this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address);
 
         }
+    }
+    private String addTag(String expert){
+        String result="";
+        String temp[];
+        temp = expert.split(",");
+        for(int i = 0 ; i < temp.length ; i++){
+            result += "#" + temp[i].trim() + " ";
+        }
+        return result;
     }
 }

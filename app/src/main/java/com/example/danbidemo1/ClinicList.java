@@ -3,11 +3,14 @@ package com.example.danbidemo1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,10 +33,10 @@ public class ClinicList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_list);
+        getSupportActionBar().hide();
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("");
-
+        RelativeLayout loader = findViewById(R.id.layout_loading);
+        loader.setVisibility(View.VISIBLE);
         recyclerView = findViewById(R.id.clinic_recycler);
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
         layoutManager = new LinearLayoutManager(this);
@@ -55,6 +58,7 @@ public class ClinicList extends AppCompatActivity {
                             }
 
                             adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
+                            loader.setVisibility(View.GONE);
                         } else {
                             Log.w("ClinicList", "Erro getting documents.", task.getException());
                         }
