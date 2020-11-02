@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "527233297376",
+    "firebase_url": "https://danbidemo1.firebaseio.com",
+    "project_id": "danbidemo1",
+    "storage_bucket": "danbidemo1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527233297376:android:79baa254f5ea4630b39985",
+        "android_client_info": {
+          "package_name": "com.example.danbidemo1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527233297376-gclg9mt3jje0e82nieo3vd0onbvv8df1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGWAwPA2-ne9qcya19vLcND5cagbbIcMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527233297376-gclg9mt3jje0e82nieo3vd0onbvv8df1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
