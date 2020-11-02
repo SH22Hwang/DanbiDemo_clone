@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 public class ClinicIntroduction extends AppCompatActivity {
 
     private Intent title_intent;
@@ -31,6 +34,7 @@ public class ClinicIntroduction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_clinic_introduction);
 
         ImageView iv_profile = findViewById(R.id.clinic_profile);
@@ -39,12 +43,14 @@ public class ClinicIntroduction extends AppCompatActivity {
         TextView tv_clinicAddress = findViewById(R.id.clinic_intro_address);
         TextView tv_clinicPhone = findViewById(R.id.clinic_intro_phoneNumber);
         TextView tv_email = findViewById(R.id.clinic_intro_email);
+        TextView rating_number = findViewById(R.id.rating_number);
         RatingBar ratingBar = findViewById(R.id.clinic_intro_rating);
 
+        Button button = findViewById(R.id.back_button);
         title_intent = getIntent();
 
         String clinic_title = title_intent.getStringExtra("ClinicTitle");
-
+        button.setText("< " + clinic_title + " 프로필");
         CollectionReference clinicRef = rootRef.collection("Danbi01");
         Query titleQuery = clinicRef.whereEqualTo("clinic_name", clinic_title);
         titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -64,7 +70,7 @@ public class ClinicIntroduction extends AppCompatActivity {
                         try{
                             //에러가 발생할 수 있는 코드
                             Glide.with(getApplicationContext())
-                                    .load(documentSnapshot)
+                                    .load(clinicData1.getProfile())
                                     .into(iv_profile);
 
                         }catch (Exception e){
@@ -75,10 +81,10 @@ public class ClinicIntroduction extends AppCompatActivity {
                             //무조건 수행
                         }
 
-
                         tv_clinicName.setText(clinic_name);
                         ratingBar.setRating(clinic_rating);
-                        tv_clinicExpertise.setText(clinic_expertise);
+                        rating_number.setText((float)clinic_rating + "(150)");
+                        tv_clinicExpertise.setText(addTag(clinic_expertise));
                         tv_clinicAddress.setText(clinic_address);
                         tv_clinicPhone.setText(clinic_phoneNumber);
                         tv_email.setText(clinic_email);
@@ -89,5 +95,16 @@ public class ClinicIntroduction extends AppCompatActivity {
             }
         });
 
+
+
+    }
+    private String addTag(String expert){
+        String result = "";
+        String temp[];
+        temp = expert.split(",");
+        for (int i = 0; i < temp.length; i++) {
+            result += "#" + temp[i].trim() + " ";
+        }
+        return result;
     }
 }
