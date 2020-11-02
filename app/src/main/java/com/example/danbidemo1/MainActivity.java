@@ -11,6 +11,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     public static final int CLINIC_LIST = 1001; //다른 액티비티 띄우기 위한 요청 코드
+    public static final int CLINIC_CHANG_LIST = 1002;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ClinicChangList.class); //intent를 사용하여 상담센터(창원)리스트 화면으로 넘어간다.
-                startActivityForResult(intent, CLINIC_LIST);
+                startActivityForResult(intent, CLINIC_CHANG_LIST);
             }
         });
 
