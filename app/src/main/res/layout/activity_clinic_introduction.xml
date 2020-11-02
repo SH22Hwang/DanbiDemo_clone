@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ClinicIntroduction">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="107dp"
@@ -34,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="상담센터 이름"
             android:textColor="#000000"
             android:textSize="30sp" />
 
@@ -75,7 +77,6 @@
                     android:layout_gravity="center"
                     android:layout_weight="0"
                     android:gravity="center"
-                    android:text="TextView"
                     android:textColor="#000000" />
             </LinearLayout>
 
@@ -90,7 +91,6 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="0"
-                    app:srcCompat="@drawable/ic_launcher_background"
                     tools:srcCompat="@drawable/danbi_logo" />
 
                 <LinearLayout
@@ -105,38 +105,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:text="상담센터 주소" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/clinic_intro_phoneNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:text="상담센터 전화번호" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/clinic_intro_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:text="상담센터 이메일" />
-
-                    <TextView
-                        android:id="@+id/clinic_intro_expertise"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:text="상담센터 전문분야"
-                        android:textColor="#9C27B0" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/clinic_intro_expertise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:textColor="#9C27B0" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -144,4 +141,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF" />
+
 </LinearLayout>
+    <include
+        layout="@layout/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</RelativeLayout>

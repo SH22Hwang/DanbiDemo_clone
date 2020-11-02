@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,6 +39,9 @@ public class ClinicIntroduction extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_clinic_introduction);
 
+        RelativeLayout loader = findViewById(R.id.layout_loading);
+        loader.setVisibility(View.VISIBLE);
+
         ImageView iv_profile = findViewById(R.id.clinic_profile);
         TextView tv_clinicName = findViewById(R.id.clinic_intro_name);
         TextView tv_clinicExpertise = findViewById(R.id.clinic_intro_expertise);
@@ -51,6 +56,12 @@ public class ClinicIntroduction extends AppCompatActivity {
 
         String clinic_title = title_intent.getStringExtra("ClinicTitle");
         button.setText("< " + clinic_title + " 프로필");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         CollectionReference clinicRef = rootRef.collection("Danbi01");
         Query titleQuery = clinicRef.whereEqualTo("clinic_name", clinic_title);
         titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -89,6 +100,7 @@ public class ClinicIntroduction extends AppCompatActivity {
                         tv_clinicPhone.setText(clinic_phoneNumber);
                         tv_email.setText(clinic_email);
 
+                        loader.setVisibility(View.GONE);
                         Log.d("ClinicIntroduction", documentSnapshot.getId() + "=>" + documentSnapshot.getData());
                     }
                 }
