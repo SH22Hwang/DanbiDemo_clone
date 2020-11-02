@@ -69,10 +69,12 @@ public class ClinicList extends AppCompatActivity {
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
         adapter.setOnItemClickListener(new OnClinicCenterClickListner() {
             @Override
-            public void OnItemClick(ClinicAdapter.ClinicViewHolder holder, View view, int position) {
+            public void OnItemClick(ClinicAdapter.ClinicViewHolder holder, View view, int position, String title) {
                 Intent intent = new Intent(getApplicationContext(), ClinicIntroduction.class);
                 Log.d("test", position + "");
+                Log.d("testtitle", title + "");
                 intent.putExtra("ClinicIndex", position);
+                intent.putExtra("ClinicTitle", title); // 타이틀 보냄.
                 startActivity(intent);
             }
         });

@@ -4,72 +4,90 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-
 public class ClinicIntroduction extends AppCompatActivity {
 
- /*   private ArrayList<Clinic> arrayList;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();// 파이어베이스 데이터베이스 연동*/
+    private Intent title_intent;
+
+    FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_introduction);
-        getSupportActionBar().hide();
- /*       Button button = findViewById(R.id.back_button);
-        RatingBar ratingBar = findViewById(R.id.clinic_intro_rating);
-        TextView rating_number = findViewById(R.id.rating_number);
-        TextView expertise = findViewById(R.id.clinic_intro_expertise);
-        TextView address = findViewById(R.id.clinic_intro_address);
-        ImageView imageView = findViewById(R.id.clinic_profile);
-        ratingBar.setRating(5.0f);
-        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        button.setText("<" +" 상담소 이름" + " 프로필");
-        address.setText("경남 진주시 대신로 475번길 6-8 2층 숨심리상담");
-        rating_number.setText("5.0 (" + "150" + ")");
-        expertise.setText("#가족상담 #부부상담 #아동상담");
-*/
 
-        /*
-        Intent intent = getIntent();
-        int position = intent.getExtras().getInt("ClinicIndex");
-        Log.d("test2", position + "");
-        *//*arrayList = new ArrayList<>(); // Clinic 객체를 담을 어레이 리스트 (어댑터 쪽으로)
-        db.collection("Danbi01") //파이어베이스에서 Danbi01 collection을 연결한다.
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-                            for (QueryDocumentSnapshot document : task.getResult()){
-                                Clinic clinic = document.toObject(Clinic.class);
-                                arrayList.add(clinic); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-                                Log.d("ClinicList", document.getId() + "=>" + document.getData());
-                            }
-                        } else {
-                            Log.w("ClinicList", "Erro getting documents.", task.getException());
+        ImageView iv_profile = findViewById(R.id.clinic_profile);
+        TextView tv_clinicName = findViewById(R.id.clinic_intro_name);
+        TextView tv_clinicExpertise = findViewById(R.id.clinic_intro_expertise);
+        TextView tv_clinicAddress = findViewById(R.id.clinic_intro_address);
+        TextView tv_clinicPhone = findViewById(R.id.clinic_intro_phoneNumber);
+        TextView tv_email = findViewById(R.id.clinic_intro_email);
+        RatingBar ratingBar = findViewById(R.id.clinic_intro_rating);
+
+        title_intent = getIntent();
+
+        String clinic_title = title_intent.getStringExtra("ClinicTitle");
+
+        CollectionReference clinicRef = rootRef.collection("Danbi01");
+        Query titleQuery = clinicRef.whereEqualTo("clinic_name", clinic_title);
+        titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        ClinicData1 clinicData1 = documentSnapshot.toObject(ClinicData1.class);
+                        //String clinic_profile = clinicData1.getProfile();
+                        String clinic_name = clinicData1.getClinic_name();
+                        int clinic_rating = (int)clinicData1.getClinic_rating();
+                        String clinic_expertise = clinicData1.getClinic_expertise();
+                        String clinic_address = clinicData1.getClinic_address();
+                        String clinic_phoneNumber = clinicData1.getClinic_phoneNumber();
+                        String clinic_email = clinicData1.getClinic_email();
+
+                        try{
+                            //에러가 발생할 수 있는 코드
+                            Glide.with(getApplicationContext())
+                                    .load(documentSnapshot)
+                                    .into(iv_profile);
+
+                        }catch (Exception e){
+                            //에러시 수행
+                            e.printStackTrace(); //오류 출력(방법은 여러가지)
+
+                        }finally{
+                            //무조건 수행
                         }
+
+
+                        tv_clinicName.setText(clinic_name);
+                        ratingBar.setRating(clinic_rating);
+                        tv_clinicExpertise.setText(clinic_expertise);
+                        tv_clinicAddress.setText(clinic_address);
+                        tv_clinicPhone.setText(clinic_phoneNumber);
+                        tv_email.setText(clinic_email);
+
+                        Log.d("ClinicIntroduction", documentSnapshot.getId() + "=>" + documentSnapshot.getData());
                     }
-                });*/
+                }
+            }
+        });
 
     }
 }

@@ -71,8 +71,9 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
+                    String title = arrayList.get(position).getClinic_name(); // 이게 맞나??
                     if(listner != null){
-                        listner.OnItemClick(ClinicViewHolder.this, view, position);
+                        listner.OnItemClick(ClinicViewHolder.this, view, position, title);
                     }
                 }
             });
@@ -85,9 +86,9 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
     }
 
     @Override
-    public void OnItemClick(ClinicViewHolder holder, View view, int position) {
+    public void OnItemClick(ClinicViewHolder holder, View view, int position, String title) {
         if(listner != null){
-            listner.OnItemClick(holder, view, position);
+            listner.OnItemClick(holder, view, position, title);
             Log.d("hello", "OnItemClickSet");
         }
     }
