@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,8 +53,8 @@ public class ClinicIntroduction extends AppCompatActivity {
         TextView tv_email = findViewById(R.id.clinic_intro_email);
         TextView rating_number = findViewById(R.id.rating_number);
         RatingBar ratingBar = findViewById(R.id.clinic_intro_rating);
-
         Button button = findViewById(R.id.back_button);
+
         title_intent = getIntent();
 
         String clinic_title = title_intent.getStringExtra("ClinicTitle");

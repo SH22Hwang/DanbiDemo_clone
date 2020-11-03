@@ -67,7 +67,9 @@
                     android:isIndicator="true"
                     android:max="6"
                     android:numStars="5"
+                    android:progressTint="#FFC107"
                     android:rating="5"
+                    android:secondaryProgressTint="#FF9800"
                     android:stepSize="0.5" />
 
                 <TextView
@@ -130,7 +132,7 @@
             android:id="@+id/clinic_intro_expertise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:textColor="#9C27B0" />
 

@@ -26,15 +26,17 @@
         android:layout_marginBottom="0dp"
         android:layout_weight="0"
         android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:translationY="-100dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginBottom="50dp"
             android:text="지역선택"
-            android:textColor="@color/black"
+            android:textColor="#333F50"
             android:textSize="30sp" />
 
         <Button
