@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,28 +17,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         getSupportActionBar().hide();
 
         Button chang = (Button)findViewById(R.id.select_changwon); // 창원 지역 버튼
         Button jin = (Button)findViewById(R.id.select_jinju); // 진주 지역 버튼
 
-        chang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ClinicChangList.class); //intent를 사용하여 상담센터(창원)리스트 화면으로 넘어간다.
-                startActivityForResult(intent, CLINIC_CHANG_LIST);
-            }
-        });
-
-        jin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ClinicList.class); //intent를 사용하여 상담센터(진주)리스트 화면으로 넘어간다.
-                startActivityForResult(intent, CLINIC_LIST);
-            }
-        });
+        BtnOnClick onClick = new BtnOnClick(ClinicChangList.class);
+        chang.setOnClickListener(onClick);
+        onClick = new BtnOnClick(ClinicList.class);
+        jin.setOnClickListener(onClick);
 
         //깃허브 연동 테스트1
 
     }
+    class BtnOnClick implements View.OnClickListener {
+        private Class c;
+        BtnOnClick(Class c) {
+            this.c = c;
+        }
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getApplicationContext(), c); //intent를 사용하여 상담센터(진주)리스트 화면으로 넘어간다.
+            startActivityForResult(intent, CLINIC_LIST);
+        }
+
+    }
 }
+

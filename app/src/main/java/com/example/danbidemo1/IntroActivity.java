@@ -9,6 +9,8 @@ import android.os.Message;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.danbidemo1.ui.login.LoginActivity;
+
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class IntroActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1){
-                Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
