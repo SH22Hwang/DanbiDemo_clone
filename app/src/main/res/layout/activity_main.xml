@@ -30,7 +30,7 @@
         android:translationY="-100dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/select_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
@@ -40,7 +40,7 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/select_jinju"
+            android:id="@+id/select_jinju_button"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -49,7 +49,7 @@
             android:textSize="17sp" />
 
         <Button
-            android:id="@+id/select_changwon"
+            android:id="@+id/select_changwon_button"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

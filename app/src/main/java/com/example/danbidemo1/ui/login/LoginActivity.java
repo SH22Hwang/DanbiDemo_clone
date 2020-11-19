@@ -1,20 +1,25 @@
 package com.example.danbidemo1.ui.login;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.danbidemo1.MainActivity;
 import com.example.danbidemo1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,14 +29,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-//    private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth;
+
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
 
@@ -39,32 +44,44 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        /*loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);*/
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.btn_login);
+        final EditText usernameEditText = findViewById(R.id.username_edittext);
+        final EditText passwordEditText = findViewById(R.id.password_edittext);
+        final Button login_Button = findViewById(R.id.login_button);
+        final TextView register_button = findViewById(R.id.register_button);
+        final CheckBox saveIdPw_checkbox = findViewById(R.id.saveidpw_checkbox);
         mAuth = FirebaseAuth.getInstance();
+        getSupportActionBar().hide();
 
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        login_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String email = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                Log.d("111", email);
-                Log.d("111", password);
                 Log.d("test", "login attempt");
-                logIn(email, password);
+                Log.d("test", email);
+                if(TextUtils.isEmpty(email) || email.contains(" ")) {
+                    Toast.makeText(LoginActivity.this, "아이디에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if (TextUtils.isEmpty(password) || password.contains(" ")) {
+                        Toast.makeText(LoginActivity.this, "비밀번호에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        if (password.length() < 6) {
+                            Toast.makeText(LoginActivity.this, "비밀번호는 6자리 이상이어야 합니다!", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            logIn(email, password);
+                        }
+                    }
+                }
 
             }
         });
-        getSupportActionBar().hide();
 
-        TextView btn_register = findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("test", "onclick");
@@ -73,26 +90,43 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+        private void logIn (String email, String password){
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Log.d("test", "login attempt inside ");
+                                Log.d("test", "signInWithEmail:success");
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
 
-    private void logIn(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("test", "signInWithEmail:success");
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                Log.d("test", "login attempt inside");
+                                Log.w("test", "signInWithEmail:failure", task.getException());
+                            }
 
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("test", "signInWithEmail:failure", task.getException());
-                            //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                              //      Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+
                         }
-                    }
-                });
-    }
+                    });
+        }
+//        private boolean getCurrentUser(){
+//
+//            if (user != null) {
+//                // Name, email address, and profile photo Url
+//                String name = user.getDisplayName();
+//                String email = user.getEmail();
+//                boolean emailVerified = user.isEmailVerified();
+//
+//                // The user's ID, unique to the Firebase project. Do NOT use this value to
+//                // authenticate with your backend server, if you have one. Use
+//                // FirebaseUser.getIdToken() instead.
+//                String uid = user.getUid();
+//                return emailVerified;
+//            }
+//            return false;
+//        }
 }

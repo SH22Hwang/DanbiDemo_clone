@@ -11,7 +11,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/toplogo_img"
         android:layout_width="107dp"
         android:layout_height="61dp"
         app:srcCompat="@drawable/danbi_logo" />
@@ -32,7 +32,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/clinic_intro_name"
+            android:id="@+id/clinic_intro_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -89,7 +89,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/clinic_profile"
+                    android:id="@+id/clinic_profile_img"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="0"
@@ -103,21 +103,21 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/clinic_intro_address"
+                        android:id="@+id/clinic_intro_address_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/clinic_intro_phoneNumber"
+                        android:id="@+id/clinic_intro_phoneNumber_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/clinic_intro_email"
+                        android:id="@+id/clinic_intro_email_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"

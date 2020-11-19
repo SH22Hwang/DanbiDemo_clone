@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,16 +22,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
-
 public class ClinicIntroduction extends AppCompatActivity {
 
     private Intent title_intent;
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +37,12 @@ public class ClinicIntroduction extends AppCompatActivity {
         RelativeLayout loader = findViewById(R.id.layout_loading);
         loader.setVisibility(View.VISIBLE);
 
-        ImageView iv_profile = findViewById(R.id.clinic_profile);
-        TextView tv_clinicName = findViewById(R.id.clinic_intro_name);
+        ImageView iv_profile = findViewById(R.id.clinic_profile_img);
+        TextView tv_clinicName = findViewById(R.id.clinic_intro_name_text);
         TextView tv_clinicExpertise = findViewById(R.id.clinic_intro_expertise);
-        TextView tv_clinicAddress = findViewById(R.id.clinic_intro_address);
-        TextView tv_clinicPhone = findViewById(R.id.clinic_intro_phoneNumber);
-        TextView tv_email = findViewById(R.id.clinic_intro_email);
+        TextView tv_clinicAddress = findViewById(R.id.clinic_intro_address_text);
+        TextView tv_clinicPhone = findViewById(R.id.clinic_intro_phoneNumber_text);
+        TextView tv_email = findViewById(R.id.clinic_intro_email_text);
         TextView rating_number = findViewById(R.id.rating_number);
         RatingBar ratingBar = findViewById(R.id.clinic_intro_rating);
         Button button = findViewById(R.id.back_button);

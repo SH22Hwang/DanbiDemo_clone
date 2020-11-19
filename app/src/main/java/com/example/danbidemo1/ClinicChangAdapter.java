@@ -60,10 +60,10 @@ public class ClinicChangAdapter extends RecyclerView.Adapter<ClinicChangAdapter.
 
         public ClinicChangViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_profile = itemView.findViewById(R.id.iv_profile);
-            this.tv_clinicName = itemView.findViewById(R.id.clinic_name);
-            this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise);
-            this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address);
+            this.iv_profile = itemView.findViewById(R.id.iv_profile_img);
+            this.tv_clinicName = itemView.findViewById(R.id.clinic_name_text);
+            this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise_text);
+            this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address_text);
         }
     }
 }

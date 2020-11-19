@@ -50,10 +50,6 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
         return (arrayList != null ? arrayList.size() : 0);
     }
 
-
-
-
-
     public class ClinicViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_profile;
         TextView tv_clinicName;
@@ -63,10 +59,10 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
 
         public ClinicViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_profile = itemView.findViewById(R.id.iv_profile);
-            this.tv_clinicName = itemView.findViewById(R.id.clinic_name);
-            this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise);
-            this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address);
+            this.iv_profile = itemView.findViewById(R.id.iv_profile_img);
+            this.tv_clinicName = itemView.findViewById(R.id.clinic_name_text);
+            this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise_text);
+            this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address_text);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

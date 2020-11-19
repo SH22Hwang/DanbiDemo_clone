@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/intro_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7"
@@ -26,7 +26,7 @@
             android:textSize="36sp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/detail1_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
@@ -59,7 +59,7 @@
                 app:srcCompat="@drawable/id_img" />
 
             <EditText
-                android:id="@+id/edit_name"
+                android:id="@+id/edit_name_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -85,7 +85,7 @@
                 app:srcCompat="@drawable/id_img" />
 
             <EditText
-                android:id="@+id/edit_username"
+                android:id="@+id/edit_username_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -110,7 +110,7 @@
                 app:srcCompat="@drawable/pw_img" />
 
             <EditText
-                android:id="@+id/edit_password"
+                android:id="@+id/edit_password_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -135,7 +135,7 @@
                 app:srcCompat="@drawable/pwc_img" />
 
             <EditText
-                android:id="@+id/edit_checkpw"
+                android:id="@+id/edit_checkpw_edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -146,7 +146,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_signup"
+            android:id="@+id/signup_button"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        Button chang = (Button)findViewById(R.id.select_changwon); // 창원 지역 버튼
-        Button jin = (Button)findViewById(R.id.select_jinju); // 진주 지역 버튼
+        Button chang = (Button)findViewById(R.id.select_changwon_button); // 창원 지역 버튼
+        Button jin = (Button)findViewById(R.id.select_jinju_button); // 진주 지역 버튼
 
         BtnOnClick onClick = new BtnOnClick(ClinicChangList.class);
         chang.setOnClickListener(onClick);
