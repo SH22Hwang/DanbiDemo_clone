@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         jin.setOnClickListener(onClick);
 
         //깃허브 연동 테스트1
-
+        //마이크 테스트
     }
     class BtnOnClick implements View.OnClickListener {
         private Class c;
