@@ -7,17 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder> implements OnClinicCenterClickListner{
-
-
     private ArrayList<Clinic> arrayList;
     private Context context;
     OnClinicCenterClickListner listner;
@@ -55,18 +50,19 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
         TextView tv_clinicExpertise;
         TextView tv_clinicAddress;
 
-
         public ClinicViewHolder(@NonNull View itemView) {
             super(itemView);
             this.iv_profile = itemView.findViewById(R.id.iv_profile_img);
             this.tv_clinicName = itemView.findViewById(R.id.clinic_name_text);
             this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise_text);
             this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address_text);
+
             itemView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    String title = arrayList.get(position).getClinic_name(); // 이게 맞나??
+                    String title = arrayList.get(position).getClinic_name();
                     if(listner != null){
                         listner.OnItemClick(ClinicViewHolder.this, view, position, title);
                     }

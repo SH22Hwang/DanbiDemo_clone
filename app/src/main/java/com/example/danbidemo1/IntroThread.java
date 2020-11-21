@@ -3,8 +3,6 @@ package com.example.danbidemo1;
 import android.os.Handler;
 import android.os.Message;
 
-
-
 public class IntroThread extends Thread {
 
     private Handler handler;
@@ -12,8 +10,6 @@ public class IntroThread extends Thread {
     public IntroThread(Handler handler){
         this.handler = handler;
     }
-
-
 
     @Override
     public void run() {
@@ -28,6 +24,5 @@ public class IntroThread extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }

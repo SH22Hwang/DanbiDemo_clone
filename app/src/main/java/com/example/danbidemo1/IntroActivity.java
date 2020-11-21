@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.danbidemo1.ui.login.LoginActivity;
 
-
 public class IntroActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +19,6 @@ public class IntroActivity extends AppCompatActivity {
 
         IntroThread introThread = new IntroThread(handler);
         introThread.start();
-
-
     }
 
     @SuppressLint("HandlerLeak")
@@ -39,6 +33,4 @@ public class IntroActivity extends AppCompatActivity {
             }
         }
     };
-
-
 }

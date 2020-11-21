@@ -1,15 +1,9 @@
 package com.example.danbidemo1.ui.login;
 
 import androidx.annotation.NonNull;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,19 +12,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.danbidemo1.MainActivity;
 import com.example.danbidemo1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-
     private FirebaseAuth mAuth;
-
 
     @Override
     public void onStart() {
@@ -38,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         getSupportActionBar().hide();
 
-
         login_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
                 Log.d("test", "login attempt");
                 Log.d("test", email);
+
                 if(TextUtils.isEmpty(email) || email.contains(" ")) {
                     Toast.makeText(LoginActivity.this, "아이디에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -77,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }
-
             }
         });
 
@@ -90,9 +78,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
         private void logIn (String email, String password){
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
@@ -101,15 +91,12 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
-
                             }
                             else{
                                 Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                 Log.d("test", "login attempt inside");
                                 Log.w("test", "signInWithEmail:failure", task.getException());
                             }
-
-
                         }
                     });
         }

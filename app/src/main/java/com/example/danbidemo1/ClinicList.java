@@ -4,23 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 
 public class ClinicList extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private ClinicAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -41,7 +37,6 @@ public class ClinicList extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); // Clinic 객체를 담을 어레이 리스트 (어댑터 쪽으로)
-
 
         db.collection("Danbi01") //파이어베이스에서 Danbi01 collection을 연결한다.
                 .get()

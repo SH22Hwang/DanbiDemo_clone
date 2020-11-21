@@ -2,7 +2,6 @@ package com.example.danbidemo1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,7 +21,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class ClinicIntroduction extends AppCompatActivity {
-
     private Intent title_intent;
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -51,14 +48,17 @@ public class ClinicIntroduction extends AppCompatActivity {
 
         String clinic_title = title_intent.getStringExtra("ClinicTitle");
         button.setText("< " + clinic_title + " 프로필");
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
         CollectionReference clinicRef = rootRef.collection("Danbi01");
         Query titleQuery = clinicRef.whereEqualTo("clinic_name", clinic_title);
+
         titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -93,24 +93,22 @@ public class ClinicIntroduction extends AppCompatActivity {
                         tv_clinicAddress.setText(clinic_address);
                         tv_clinicPhone.setText(clinic_phoneNumber);
                         tv_email.setText(clinic_email);
-
                         loader.setVisibility(View.GONE);
                         Log.d("ClinicIntroduction", documentSnapshot.getId() + "=>" + documentSnapshot.getData());
                     }
                 }
             }
         });
-
-
-
     }
     private String addTag(String expert){
         String result = "";
         String temp[];
         temp = expert.split(",");
+
         for (int i = 0; i < temp.length; i++) {
             result += "#" + temp[i].trim() + " ";
         }
+
         return result;
     }
 }

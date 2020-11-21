@@ -1,7 +1,6 @@
 package com.example.danbidemo1.data;
 
 import com.example.danbidemo1.data.model.LoggedInUser;
-
 import java.io.IOException;
 
 /**

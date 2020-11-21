@@ -2,7 +2,6 @@ package com.example.danbidemo1.ui.login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.danbidemo1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,14 +19,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
-
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +37,16 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText user_password = findViewById(R.id.edit_password_edittext);
         EditText user_passTemp = findViewById(R.id.edit_checkpw_edittext);
         getSupportActionBar().hide();
+
         btn_signUp.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String name = user_name.getText().toString();
                 String id = user_id.getText().toString();
                 String password = user_password.getText().toString();
                 String password_check = user_passTemp.getText().toString();
+
                 if(TextUtils.isEmpty(name) || id.contains(" ")) {
                     Toast.makeText(RegistrationActivity.this, "이름에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -80,6 +80,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void SignUp(String id, String password, String name) {
         mAuth.createUserWithEmailAndPassword(id, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -93,12 +94,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             db.collection("users")
                                     .add(userdata)
+
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             Log.d("test", "DocumentSnapshot added with ID: " + documentReference.getId());
                                         }
                                     })
+
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
@@ -112,12 +115,9 @@ public class RegistrationActivity extends AppCompatActivity {
                             Toast.makeText(RegistrationActivity.this, "회원가입에 실패했습니다.",Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
-
 }
 
 

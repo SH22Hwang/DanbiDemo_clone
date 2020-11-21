@@ -25,18 +25,19 @@ public class MainActivity extends AppCompatActivity {
         chang.setOnClickListener(onClick);
         onClick = new BtnOnClick(ClinicList.class);
         jin.setOnClickListener(onClick);
-
     }
+
     class BtnOnClick implements View.OnClickListener {
         private Class c;
+
         BtnOnClick(Class c) {
             this.c = c;
         }
+
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), c); //intent를 사용하여 상담센터(진주)리스트 화면으로 넘어간다.
             startActivityForResult(intent, CLINIC_LIST);
         }
-
     }
 }

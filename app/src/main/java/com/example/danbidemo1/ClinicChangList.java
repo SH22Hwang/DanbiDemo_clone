@@ -2,19 +2,16 @@ package com.example.danbidemo1;
 
 import android.os.Bundle;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 
 public class ClinicChangList extends AppCompatActivity {
@@ -47,6 +44,7 @@ public class ClinicChangList extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
+
                             for (QueryDocumentSnapshot document : task.getResult()){
                                 ClinicChang clinicChang = document.toObject(ClinicChang.class);
                                 arrayList.add(clinicChang); //데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
@@ -59,9 +57,8 @@ public class ClinicChangList extends AppCompatActivity {
                         }
                     }
                 });
+
         adapter = new ClinicChangAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-
-
     }
 }
