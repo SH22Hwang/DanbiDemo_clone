@@ -46,7 +46,6 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
 
     @Override
     public int getItemCount() {
-        // 삼항 연산자
         return (arrayList != null ? arrayList.size() : 0);
     }
 

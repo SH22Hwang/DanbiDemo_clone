@@ -1,9 +1,7 @@
 package com.example.danbidemo1;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,22 +76,5 @@ public class ClinicList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        notebookRef.get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화시켜줌.
-//                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-//                            Clinic clinic = documentSnapshot.toObject(Clinic.class);
-//                            arrayList.add(clinic); // 데이터를 배열리스트에 담아 리사이클러 뷰로 보낼 준비
-//                        }
-//                        adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
-//                    }
-//                });
-//
-//
-//        adapter = new ClinicAdapter(arrayList, this);
-//        recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
     }
 }

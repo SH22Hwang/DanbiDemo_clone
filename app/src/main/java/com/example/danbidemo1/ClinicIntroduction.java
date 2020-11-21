@@ -65,7 +65,6 @@ public class ClinicIntroduction extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         ClinicData1 clinicData1 = documentSnapshot.toObject(ClinicData1.class);
-                        //String clinic_profile = clinicData1.getProfile();
                         String clinic_name = clinicData1.getClinic_name();
                         int clinic_rating = (int)clinicData1.getClinic_rating();
                         String clinic_expertise = clinicData1.getClinic_expertise();
