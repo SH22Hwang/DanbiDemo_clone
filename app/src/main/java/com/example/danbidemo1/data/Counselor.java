@@ -1,15 +1,13 @@
-package com.example.danbidemo1;
+package com.example.danbidemo1.data;
 
-public class CounsellingCenter {
-    private String profile;
-    private String expert;
-    private String address;
-    private String name;
-    private long rating;
-    private String email;
-    private String contact;
-
-    public CounsellingCenter() {}
+/** 상담사 리사이클러뷰 및 파이어베이스를 이용하기 위한 Getter and Setter */
+public class Counselor {
+    private String profile; // 프로필(사진)
+    private String expert; // 전문분야
+    private String counselorName; // 상담사 이름
+    private long rating; // 점수, 별점
+    private String email; // 이메일
+    private String contact; // 전화번호
 
     public String getProfile() {
         return profile;
@@ -27,20 +25,12 @@ public class CounsellingCenter {
         this.expert = expert;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCounselorName() {
+        return counselorName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setCounselorName(String counselorName) {
+        this.counselorName = counselorName;
     }
 
     public long getRating() {

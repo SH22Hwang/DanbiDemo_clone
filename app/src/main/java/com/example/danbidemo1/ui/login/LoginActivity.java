@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.example.danbidemo1.MainActivity;
+import com.example.danbidemo1.activity.MainActivity;
 import com.example.danbidemo1.R;
 import com.example.danbidemo1.controllers.DanbiController;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/** 로그인 화면 액티비티 */
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DanbiController danbiController;

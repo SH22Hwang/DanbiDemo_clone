@@ -5,12 +5,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-
-
-import com.example.danbidemo1.ClinicAdapter;
-import com.example.danbidemo1.CounsellingCenter;
+import com.example.danbidemo1.adapter.ClinicAdapter;
+import com.example.danbidemo1.data.CounsellingCenter;
 import com.example.danbidemo1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,11 +17,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.Map;
 
-
+/** 화면에 로딩을 띄우는 메소드와 파이어베이스에 데이터를 주고 받는 메소드를 포함한 클래스 */
 public class DanbiController {
     private Activity activity;
 

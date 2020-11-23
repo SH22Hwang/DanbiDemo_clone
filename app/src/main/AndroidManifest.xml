@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Danbidemo1">
         <activity android:name=".ui.login.RegistrationActivity" />
-        <activity android:name=".ClinicIntroduction" />
-        <activity android:name=".IntroActivity">
+        <activity android:name=".activity.ClinicIntroduction" />
+        <activity android:name=".activity.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClinicList" />
+        <activity android:name=".activity.ClinicList" />
         <activity android:name=".ClinicChangList" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

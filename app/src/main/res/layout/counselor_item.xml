@@ -6,31 +6,74 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/counselor_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/clinic_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
+            android:id="@+id/counsellor_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/counselor_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:paddingEnd="20dp"
+                    android:text="상담사 이름" />
+
+                <RatingBar
+                    android:id="@+id/counselor_rating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressTint="#FFC107"
+                    android:rating="5"
+                    android:stepSize="0.5" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/clinic_detail_text"
+                android:id="@+id/counselor_expertise_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="상담사 정보"
-                android:textSize="30sp" />
+                android:text="상담사 전문분야"
+                android:textSize="15sp" />
+
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/write_review"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            app:srcCompat="@drawable/write_review" />
+
+        <ImageView
+            android:id="@+id/read_review"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            app:srcCompat="@drawable/read_review" />
     </LinearLayout>
 </LinearLayout>

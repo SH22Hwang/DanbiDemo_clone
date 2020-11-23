@@ -3,6 +3,7 @@ package com.example.danbidemo1;
 import android.os.Handler;
 import android.os.Message;
 
+/** IntroActivity의 시간을 조절하는 쓰레드 */
 public class IntroThread extends Thread {
 
     private Handler handler;

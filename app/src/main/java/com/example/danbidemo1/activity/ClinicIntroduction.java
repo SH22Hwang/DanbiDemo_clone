@@ -1,8 +1,7 @@
-package com.example.danbidemo1;
+package com.example.danbidemo1.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.danbidemo1.data.CounsellingCenter;
+import com.example.danbidemo1.R;
 import com.example.danbidemo1.controllers.DanbiController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,8 +22,10 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/** 상담센터 상세 정보를 보여주는 액티비티 화면 */
 public class ClinicIntroduction extends AppCompatActivity {
     private Intent title_intent;
+    private Intent select_area_intent;
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
@@ -46,8 +48,9 @@ public class ClinicIntroduction extends AppCompatActivity {
         Button button = findViewById(R.id.back_button);
 
         title_intent = getIntent();
-
-        String clinic_title = title_intent.getStringExtra("ClinicTitle");
+        select_area_intent = getIntent();
+        String select_area = select_area_intent.getStringExtra("Select_area"); //선택 지역 값 intent로 받아옴.
+        String clinic_title = title_intent.getStringExtra("ClinicTitle"); //선택된 상담센터 타이틀 값 intent로 받아옴.
         button.setText("< " + clinic_title + " 프로필");
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +60,7 @@ public class ClinicIntroduction extends AppCompatActivity {
             }
         });
 
-        CollectionReference clinicRef = rootRef.collection("Danbi01");
+        CollectionReference clinicRef = rootRef.collection(select_area);
         Query titleQuery = clinicRef.whereEqualTo("name", clinic_title);
 
         titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -101,6 +104,7 @@ public class ClinicIntroduction extends AppCompatActivity {
             }
         });
     }
+
     private String addTag(String expert){
         String result = "";
         String temp[];
