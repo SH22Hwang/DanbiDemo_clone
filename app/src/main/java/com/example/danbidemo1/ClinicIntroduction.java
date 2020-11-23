@@ -58,7 +58,7 @@ public class ClinicIntroduction extends AppCompatActivity {
         });
 
         CollectionReference clinicRef = rootRef.collection("Danbi01");
-        Query titleQuery = clinicRef.whereEqualTo("clinic_name", clinic_title);
+        Query titleQuery = clinicRef.whereEqualTo("name", clinic_title);
 
         titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
