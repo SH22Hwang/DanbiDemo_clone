@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.example.danbidemo1.MainActivity;
 import com.example.danbidemo1.R;
+import com.example.danbidemo1.controllers.DanbiController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-
+    DanbiController danbiController;
     @Override
     public void onStart() {
         super.onStart();
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        danbiController = new DanbiController(this);
         final EditText usernameEditText = findViewById(R.id.username_edittext);
         final EditText passwordEditText = findViewById(R.id.password_edittext);
         final Button login_Button = findViewById(R.id.login_button);
@@ -51,15 +51,15 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("test", email);
 
                 if(TextUtils.isEmpty(email) || email.contains(" ")) {
-                    Toast.makeText(LoginActivity.this, "아이디에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                    danbiController.popupException("아이디에 공백값이 있습니다.");
                 }
                 else{
                     if (TextUtils.isEmpty(password) || password.contains(" ")) {
-                        Toast.makeText(LoginActivity.this, "비밀번호에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                        danbiController.popupException("비밀번호에 공백값이 있습니다.");
                     }
                     else {
                         if (password.length() < 6) {
-                            Toast.makeText(LoginActivity.this, "비밀번호는 6자리 이상이어야 합니다!", Toast.LENGTH_SHORT).show();
+                            danbiController.popupException("비밀번호는 6자리 이상이어야 합니다!");
                         }
                         else {
                             logIn(email, password);
@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             }
                             else{
-                                Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                danbiController.popupException("로그인에 실패했습니다.");
                                 Log.d("test", "login attempt inside");
                                 Log.w("test", "signInWithEmail:failure", task.getException());
                             }

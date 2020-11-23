@@ -13,10 +13,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder> implements OnClinicCenterClickListner{
-    private ArrayList<Clinic> arrayList;
+    private ArrayList<CounsellingCenter> arrayList;
     private Context context;
-    OnClinicCenterClickListner listner;
-    public ClinicAdapter(ArrayList<Clinic> arrayList, Context context) {
+    OnClinicCenterClickListner listener;
+    public ClinicAdapter(ArrayList<CounsellingCenter> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -34,9 +34,9 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
-        holder.tv_clinicName.setText(arrayList.get(position).getClinic_name());
-        holder.tv_clinicExpertise.setText(addTag(arrayList.get(position).getClinic_expertise()));
-        holder.tv_clinicAddress.setText(arrayList.get(position).getClinic_address());
+        holder.tv_clinicName.setText(arrayList.get(position).getName());
+        holder.tv_clinicExpertise.setText(addTag(arrayList.get(position).getExpert()));
+        holder.tv_clinicAddress.setText(arrayList.get(position).getAddress());
     }
 
     @Override
@@ -58,13 +58,12 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
             this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address_text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    String title = arrayList.get(position).getClinic_name();
-                    if(listner != null){
-                        listner.OnItemClick(ClinicViewHolder.this, view, position, title);
+                    String title = arrayList.get(position).getName();
+                    if(listener != null){
+                        listener.OnItemClick(ClinicViewHolder.this, view, position, title);
                     }
                 }
             });
@@ -72,14 +71,14 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
     }
 
     public void setOnItemClickListener(OnClinicCenterClickListner listener){
-        this.listner = listener;
+        this.listener = listener;
         Log.d("test", "SetOnItemClick");
     }
 
     @Override
     public void OnItemClick(ClinicViewHolder holder, View view, int position, String title) {
-        if(listner != null){
-            listner.OnItemClick(holder, view, position, title);
+        if(listener != null){
+            listener.OnItemClick(holder, view, position, title);
             Log.d("hello", "OnItemClickSet");
         }
     }

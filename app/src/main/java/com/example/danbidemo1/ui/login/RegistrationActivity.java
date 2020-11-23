@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.danbidemo1.R;
+import com.example.danbidemo1.controllers.DanbiController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,10 +25,10 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    DanbiController danbiController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        danbiController = new DanbiController(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeration);
         mAuth = FirebaseAuth.getInstance();
@@ -48,23 +49,23 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password_check = user_passTemp.getText().toString();
 
                 if(TextUtils.isEmpty(name) || id.contains(" ")) {
-                    Toast.makeText(RegistrationActivity.this, "이름에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                    danbiController.popupException("이름에 공백값이 있습니다.");
                 }
                 else{
                     if (TextUtils.isEmpty(id) || id.contains(" ")) {
-                        Toast.makeText(RegistrationActivity.this, "아이디에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                        danbiController.popupException("아이디에 공백값이 있습니다.");
                     }
                     else {
                         if (!password.equals(password_check)) {
-                            Toast.makeText(RegistrationActivity.this, "비밀번호가 같지 않습니다!", Toast.LENGTH_SHORT).show();
+                            danbiController.popupException("비밀번호가 같지 않습니다!");
                         }
                         else {
                             if (TextUtils.isEmpty(password) || password.contains(" ")) {
-                                Toast.makeText(RegistrationActivity.this, "비밀번호에 공백값이 있습니다.", Toast.LENGTH_SHORT).show();
+                                danbiController.popupException("비밀번호에 공백값이 있습니다.");
                             }
                             else {
                                 if (password.length() < 6) {
-                                    Toast.makeText(RegistrationActivity.this, "비밀번호는 6자리 이상이어야 합니다!", Toast.LENGTH_SHORT).show();
+                                    danbiController.popupException("비밀번호는 6자리 이상이어야 합니다!");
                                 }
                                 else {
                                     SignUp(id, password, name);
@@ -80,39 +81,22 @@ public class RegistrationActivity extends AppCompatActivity {
     private void SignUp(String id, String password, String name) {
         mAuth.createUserWithEmailAndPassword(id, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("test", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegistrationActivity.this, "회원가입에 성공했습니다.",Toast.LENGTH_SHORT).show();
+                            danbiController.popupException("회원가입에 성공했습니다.");
                             Map<String, Object> userdata = new HashMap<>();
                             userdata.put("id", user);
                             userdata.put("name", name);
-
-                            db.collection("users")
-                                    .add(userdata)
-
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Log.d("test", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                        }
-                                    })
-
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("test", "Error adding document", e);
-                                        }
-                                    });
+                            danbiController.setFirebaseData("users", userdata);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("test", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegistrationActivity.this, "회원가입에 실패했습니다.",Toast.LENGTH_SHORT).show();
+                            danbiController.popupException("회원가입에 실패했습니다.");
                             //updateUI(null);
                         }
                     }

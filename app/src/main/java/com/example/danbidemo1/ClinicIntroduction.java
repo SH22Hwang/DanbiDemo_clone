@@ -2,6 +2,7 @@ package com.example.danbidemo1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.danbidemo1.controllers.DanbiController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,9 +32,8 @@ public class ClinicIntroduction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_clinic_introduction);
-
-        RelativeLayout loader = findViewById(R.id.layout_loading);
-        loader.setVisibility(View.VISIBLE);
+        DanbiController danbiController = new DanbiController(this);
+        danbiController.popupLoading();
 
         ImageView iv_profile = findViewById(R.id.clinic_profile_img);
         TextView tv_clinicName = findViewById(R.id.clinic_intro_name_text);
@@ -64,13 +65,13 @@ public class ClinicIntroduction extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        ClinicData1 clinicData1 = documentSnapshot.toObject(ClinicData1.class);
-                        String clinic_name = clinicData1.getClinic_name();
-                        int clinic_rating = (int)clinicData1.getClinic_rating();
-                        String clinic_expertise = clinicData1.getClinic_expertise();
-                        String clinic_address = clinicData1.getClinic_address();
-                        String clinic_phoneNumber = clinicData1.getClinic_phoneNumber();
-                        String clinic_email = clinicData1.getClinic_email();
+                        CounsellingCenter clinicData1 = documentSnapshot.toObject(CounsellingCenter.class);
+                        String clinic_name = clinicData1.getName();
+                        int clinic_rating = (int)clinicData1.getRating();
+                        String clinic_expertise = clinicData1.getExpert();
+                        String clinic_address = clinicData1.getAddress();
+                        String clinic_phoneNumber = clinicData1.getContact();
+                        String clinic_email = clinicData1.getEmail();
 
                         try{
                             //에러가 발생할 수 있는 코드
@@ -93,7 +94,7 @@ public class ClinicIntroduction extends AppCompatActivity {
                         tv_clinicAddress.setText(clinic_address);
                         tv_clinicPhone.setText(clinic_phoneNumber);
                         tv_email.setText(clinic_email);
-                        loader.setVisibility(View.GONE);
+                        danbiController.unableLoading();
                         Log.d("ClinicIntroduction", documentSnapshot.getId() + "=>" + documentSnapshot.getData());
                     }
                 }
