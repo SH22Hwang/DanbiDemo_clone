@@ -73,7 +73,7 @@ public class ClinicIntroduction extends AppCompatActivity {
         adapter = new CounselorAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
 
-        //임시 개발중..
+        //임시 개발중...
         adapter.setOnItemClickListener(new OnClinicCounselorClickListener() {
             @Override
             public void OnItemClick(CounselorAdapter.CounselorViewHolder holder, View view, int position, String title) {
@@ -86,7 +86,7 @@ public class ClinicIntroduction extends AppCompatActivity {
                 //startActivity(intent);
             }
         });
-        //개발 중..
+        //개발 중...
 
         title_intent = getIntent();
         select_area_intent = getIntent();
