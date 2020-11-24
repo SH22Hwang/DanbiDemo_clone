@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +29,7 @@ public class CounselorAdapter extends RecyclerView.Adapter<CounselorAdapter.Coun
     @NonNull
     @Override
     public CounselorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clinic_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.counselor_item, parent, false);
         CounselorViewHolder holder = new CounselorViewHolder(view);
         return holder;
     }
@@ -38,9 +39,9 @@ public class CounselorAdapter extends RecyclerView.Adapter<CounselorAdapter.Coun
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
-        holder.tv_clinicName.setText(arrayList.get(position).getCounselorName());
-        holder.tv_clinicExpertise.setText(addTag(arrayList.get(position).getExpert()));
-        //holder.tv_clinicAddress.setText(arrayList.get(position).getAddress());
+        holder.tv_counselorName.setText(arrayList.get(position).getCounselorName());
+        holder.tv_counselorExpert.setText(addTag(arrayList.get(position).getExpert()));
+        holder.rating_counselor.setRating(arrayList.get(position).getRating());
     }
 
     @Override
@@ -50,16 +51,16 @@ public class CounselorAdapter extends RecyclerView.Adapter<CounselorAdapter.Coun
 
     public class CounselorViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_profile;
-        TextView tv_clinicName;
-        TextView tv_clinicExpertise;
-        TextView tv_clinicAddress;
+        TextView tv_counselorName;
+        TextView tv_counselorExpert;
+        RatingBar rating_counselor;
 
         public CounselorViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_profile = itemView.findViewById(R.id.iv_profile_img);
-            this.tv_clinicName = itemView.findViewById(R.id.clinic_name_text);
-            this.tv_clinicExpertise = itemView.findViewById(R.id.clinic_expertise_text);
-            this.tv_clinicAddress = itemView.findViewById(R.id.clinic_address_text);
+            this.iv_profile = itemView.findViewById(R.id.counselor_img);
+            this.tv_counselorName = itemView.findViewById(R.id.counselor_name_text);
+            this.tv_counselorExpert = itemView.findViewById(R.id.counselor_expert_text);
+            this.rating_counselor = itemView.findViewById(R.id.counselor_rating);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
