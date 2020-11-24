@@ -86,7 +86,7 @@ public class ClinicIntroduction extends AppCompatActivity {
                 //startActivity(intent);
             }
         });
-        //개발 중...
+        //개발 중..
 
         title_intent = getIntent();
         select_area_intent = getIntent();
