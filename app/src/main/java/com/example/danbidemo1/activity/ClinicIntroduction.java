@@ -1,7 +1,9 @@
-package com.example.danbidemo1;
+package com.example.danbidemo1.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +15,15 @@ import android.widget.RatingBar;
 
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.danbidemo1.OnClinicCenterClickListner;
+import com.example.danbidemo1.OnClinicCounselorClickListener;
+import com.example.danbidemo1.R;
+import com.example.danbidemo1.adapter.ClinicAdapter;
+import com.example.danbidemo1.adapter.CounselorAdapter;
+import com.example.danbidemo1.controllers.CounselorController;
 import com.example.danbidemo1.controllers.DanbiController;
+import com.example.danbidemo1.data.CounsellingCenter;
+import com.example.danbidemo1.data.Counselor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -22,8 +32,16 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
+/** 상담센터 상세 정보를 보여주는 액티비티 화면 */
 public class ClinicIntroduction extends AppCompatActivity {
     private Intent title_intent;
+    private Intent select_area_intent;
+    private RecyclerView recyclerView;
+    private CounselorAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Counselor> arrayList;
 
     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
@@ -45,9 +63,35 @@ public class ClinicIntroduction extends AppCompatActivity {
         RatingBar ratingBar = findViewById(R.id.clinic_intro_rating);
         Button button = findViewById(R.id.back_button);
 
-        title_intent = getIntent();
+        CounselorController counselorController = new CounselorController(this);
+        danbiController.popupLoading();
+        recyclerView = findViewById(R.id.counselor_recycler);
+        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        arrayList = new ArrayList<Counselor>(); // Clinic 객체를 담을 어레이 리스트 (어댑터 쪽으로)
+        adapter = new CounselorAdapter(arrayList, this);
+        recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
 
-        String clinic_title = title_intent.getStringExtra("ClinicTitle");
+        //임시 개발중...
+        adapter.setOnItemClickListener(new OnClinicCounselorClickListener() {
+            @Override
+            public void OnItemClick(CounselorAdapter.CounselorViewHolder holder, View view, int position, String title) {
+                Intent intent = new Intent(getApplicationContext(), ClinicIntroduction.class);
+                Log.d("test_position", position + "");
+                Log.d("test_title", title + "");
+                //intent.putExtra("ClinicIndex", position);
+                //intent.putExtra("ClinicTitle", title); // 타이틀값을 ClinicIntroduction으로 보냄.
+                //intent.putExtra("Select_area", select_area); // 선택 지역값을 ClinicIntroduction으로 보냄.
+                //startActivity(intent);
+            }
+        });
+        //개발 중..
+
+        title_intent = getIntent();
+        select_area_intent = getIntent();
+        String select_area = select_area_intent.getStringExtra("Select_area"); //선택 지역 값 intent로 받아옴.
+        String clinic_title = title_intent.getStringExtra("ClinicTitle"); //선택된 상담센터 타이틀 값 intent로 받아옴.
         button.setText("< " + clinic_title + " 프로필");
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +101,7 @@ public class ClinicIntroduction extends AppCompatActivity {
             }
         });
 
-        CollectionReference clinicRef = rootRef.collection("Danbi01");
+        CollectionReference clinicRef = rootRef.collection(select_area);
         Query titleQuery = clinicRef.whereEqualTo("name", clinic_title);
 
         titleQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -96,6 +140,8 @@ public class ClinicIntroduction extends AppCompatActivity {
                         tv_email.setText(clinic_email);
                         danbiController.unableLoading();
                         Log.d("ClinicIntroduction", documentSnapshot.getId() + "=>" + documentSnapshot.getData());
+                        Log.d("컬렉션 주소값 테스트", select_area+"/"+documentSnapshot.getId()+"/"+"Counselor");
+                        counselorController.getFirebaseData(select_area+"/"+documentSnapshot.getId()+"/"+"Counselor", arrayList, adapter);
                     }
                 }
             }

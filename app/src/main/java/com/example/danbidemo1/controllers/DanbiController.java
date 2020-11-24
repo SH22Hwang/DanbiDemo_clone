@@ -59,7 +59,7 @@ public class DanbiController {
                             adapter.notifyDataSetChanged(); //리스트 저장 및 새로고침
                             unableLoading();
                         } else {
-                            Log.w("ClinicList", "Erro getting documents.", task.getException());
+                            Log.w("ClinicList", "Error getting documents.", task.getException());
                         }
                     }
                 });

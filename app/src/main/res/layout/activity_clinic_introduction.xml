@@ -154,7 +154,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/counseling_center_intro_recycler"
+        android:id="@+id/counselor_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF" />

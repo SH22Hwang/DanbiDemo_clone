@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="아이디"
+                    android:text="상담센터 이름"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -47,14 +47,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="유저이름" />
+                    android:text="상담센터 주소" />
 
                 <TextView
                     android:id="@+id/clinic_expertise_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="비밀번호"
+                    android:text="전문분야"
                     android:textColor="#9C27B0"
                     android:textColorLink="#03A9F4"
                     android:textSize="12sp" />
