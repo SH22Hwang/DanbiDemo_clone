@@ -1,5 +1,7 @@
 package com.example.danbidemo1;
 
+import com.example.danbidemo1.controllers.SystemController;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +13,8 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void addTag_isCorrect() {
+        assertEquals("#청소년 #가정 #금연 ", SystemController.addTag("청소년,가정, 금연"));
     }
+
 }
