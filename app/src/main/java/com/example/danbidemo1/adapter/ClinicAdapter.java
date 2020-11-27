@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.danbidemo1.controllers.SystemController;
 import com.example.danbidemo1.data.CounsellingCenter;
 import com.example.danbidemo1.OnClinicCenterClickListner;
 import com.example.danbidemo1.R;
@@ -39,7 +40,7 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
         holder.tv_clinicName.setText(arrayList.get(position).getName());
-        holder.tv_clinicExpertise.setText(addTag(arrayList.get(position).getExpert()));
+        holder.tv_clinicExpertise.setText(SystemController.addTag(arrayList.get(position).getExpert()));
         holder.tv_clinicAddress.setText(arrayList.get(position).getAddress());
     }
 
@@ -85,15 +86,5 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
             listener.OnItemClick(holder, view, position, title);
             Log.d("hello", "OnItemClickSet");
         }
-    }
-
-    private String addTag(String expert){
-        String result="";
-        String temp[];
-        temp = expert.split(",");
-        for(int i = 0 ; i < temp.length ; i++){
-            result += "#" + temp[i].trim() + " ";
-        }
-        return result;
     }
 }

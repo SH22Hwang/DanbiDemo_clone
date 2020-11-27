@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.danbidemo1.controllers.SystemController;
 import com.example.danbidemo1.data.Counselor;
 import com.example.danbidemo1.OnClinicCounselorClickListener;
 import com.example.danbidemo1.R;
@@ -40,7 +41,7 @@ public class CounselorAdapter extends RecyclerView.Adapter<CounselorAdapter.Coun
                 .load(arrayList.get(position).getProfile())
                 .into(holder.iv_profile);
         holder.tv_counselorName.setText(arrayList.get(position).getCounselorName());
-        holder.tv_counselorExpert.setText(addTag(arrayList.get(position).getExpert()));
+        holder.tv_counselorExpert.setText(SystemController.addTag(arrayList.get(position).getExpert()));
         holder.rating_counselor.setRating(arrayList.get(position).getRating());
     }
 
@@ -86,15 +87,5 @@ public class CounselorAdapter extends RecyclerView.Adapter<CounselorAdapter.Coun
             listener.OnItemClick(holder, view, position, title);
             Log.d("hello", "OnItemClickSet");
         }
-    }
-
-    private String addTag(String expert){
-        String result="";
-        String temp[];
-        temp = expert.split(",");
-        for(int i = 0 ; i < temp.length ; i++){
-            result += "#" + temp[i].trim() + " ";
-        }
-        return result;
     }
 }
