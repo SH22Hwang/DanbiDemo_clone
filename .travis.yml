@@ -2,8 +2,6 @@ language: java
 
 sudo: required
 
-install: gradle wrapper --gradle-version 4.2
-
 before_install:
     - chmod +x gradlew
     - chmod +x gradle/wrapper/gradle-wrapper.jar
